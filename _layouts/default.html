@@ -4,27 +4,9 @@
     <meta charset="utf-8">
     <title>{{ page.title }}</title>
     <link rel="stylesheet" href="/assets/main.css">
-    <link
-      href="/dist/svelte-bundle.css?{% raw %}{{site.time | date: '%s%N'}}{% endraw %}"
-      rel="stylesheet"
-  />
-
-    <script
-      defer
-      src="/dist/svelte-bundle.js?{% raw %}{{site.time | date: '%s%N'}}{% endraw %}"
-    ></script>
+    <link href="/dist/svelte-bundle.css?{% raw %}{{site.time | date: '%s%N'}}{% endraw %}" rel="stylesheet" />
+    <script defer src="/dist/svelte-bundle.js?{% raw %}{{site.time | date: '%s%N'}}{% endraw %}" ></script>
   </head>
   <body>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/blog/">Blog</a>
-    </nav>
-    <h1>{{ page.title }}</h1>
-    <section>
-      {{ content }}
-    </section>
-    <footer>
-      &copy; to me
-    </footer>
   </body>
 </html>
