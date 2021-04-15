@@ -1,5 +1,8 @@
 <script>
+  import { gsap } from 'gsap';
 	export let name;
+
+  gsap.registerPlugin(ScrollTrigger);
 </script>
 
 <main>
