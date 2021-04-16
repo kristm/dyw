@@ -1,15 +1,28 @@
 <script>
+  import { onMount } from 'svelte';
   import { gsap } from 'gsap';
 	export let name;
 
   gsap.registerPlugin(ScrollTrigger);
-</script>
 
+  onMount(() => {
+    let scene1 = gsap.timeline();
+    ScrollTrigger.create({
+      animation: scene1,
+      trigger: "main",
+      start: "top",
+      end: "bottom",
+    });
+
+    console.log(">> ", document.querySelector("#bg-wrap"));
+    scene1.to("#bg-wrap", { y: 2000, duration: 1.5 }, 0);
+  });
+</script>
 <template lang="pug">
   main
     h1 hello #{name} :metal:
 
-    div(class='bg')
+    div(class='bg' id='bg-wrap')
       - for (var i=0; i<4; i++)
         div(class='bg'+i)
 
@@ -25,7 +38,7 @@
     width: 100%;
     height: 50%;
     position: absolute;
-    bottom: 0;
+    top: -500px;
 
     > div {
       width: 100%;
