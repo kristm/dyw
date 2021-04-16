@@ -5,28 +5,35 @@
   gsap.registerPlugin(ScrollTrigger);
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-</main>
+<template lang="pug">
+  main
+    h1 hello #{name} :metal:
 
-<style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
+    - for (var i=0; i<4; i++)
+      div(class='bg bg'+i)
 
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
+</template>
+<style lang="stylus">
+	main
+    height 2000px
 
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
+  .bg {
+    width: 100%;
+    background-position: bottom center;
+    background-repeat: no-repeat;
+  }
+
+  .bg0 {
+    background-image: url(/images/bg0.png);
+    height: 100%;
+  }
+
+  .bg1 {
+    background-image: url(/images/bg1.png);
+    height: 100%;
+  }
+
+	@media (min-width: 640px)
+		main
+			max-width none
 </style>
