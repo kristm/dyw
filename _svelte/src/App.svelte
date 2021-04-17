@@ -6,16 +6,17 @@
   gsap.registerPlugin(ScrollTrigger);
 
   onMount(() => {
-    let scene1 = gsap.timeline();
+    let scene1 = gsap.timeline({yoyo:true}); // TODO: add callback to return to original Y position (-500)
     ScrollTrigger.create({
       animation: scene1,
       trigger: "main",
       start: "top",
-      end: "bottom",
+      pin: true,
+      toggleActions: "restart none reverse pause",
     });
 
     console.log(">> ", document.querySelector("#bg-wrap"));
-    scene1.to("#bg-wrap", { y: 2000, duration: 1.5 }, 0);
+    scene1.to("#bg-wrap", { yPercent: 40, duration: 1 }, 0).to("#bg-wrap", {opacity:0, duration: 0},1);
   });
 </script>
 <template lang="pug">
@@ -26,12 +27,20 @@
       - for (var i=0; i<4; i++)
         div(class='bg'+i)
 
+    footer
 </template>
 <style lang="stylus">
 	main
     height 3000px
     position relative
     border: 5px solid blue
+
+  footer
+    height 600px
+    width 100%
+    border 5px solid green
+    position absolute
+    bottom 0
 
   .bg {
     border: 5px solid red;
