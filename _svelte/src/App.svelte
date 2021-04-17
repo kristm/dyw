@@ -6,42 +6,32 @@
   gsap.registerPlugin(ScrollTrigger);
 
   onMount(() => {
-    let scene1 = gsap.timeline({yoyo:true}); // TODO: add callback to return to original Y position (-500)
+    let scene1 = gsap.timeline(); // TODO: add callback to return to original Y position (-500)
     ScrollTrigger.create({
       animation: scene1,
       trigger: "main",
-      start: "top",
-      snap: { snapTo: "labels" },
-      pin: true,
-      toggleActions: "restart none reverse pause",
+      start: "top top",
+      end: "45% 100%",
+      markers: true,
+      toggleActions: "restart none reverse none",
     });
 
-    console.log(">> ", document.querySelector("#bg-wrap"));
-    scene1.addLabel("start").to("#bg-wrap", { yPercent: 40, duration: 1 }, 0).to("#bg-wrap", {opacity:0, duration: 0},1);
+    scene1.to("#bg-wrap", { yPercent: 150, duration: 2 }, 0);
+    scene1.to("#bg-wrap", {opacity:0, duration: 1},.5);
 
-    // let scene2 = gsap.timeline();
-    // ScrollTrigger.create({
-    //   animation: scene2,
-    //   trigger: "footer",
-    //   start: "top center",
-    //   markers: true,
-    //   toggleActions: "restart none reverse pause",
-    // });
-
-    // scene2.from("footer", { opacity: 0, yPercent: 100 }, 0)
-    //       .from("footer dev", { y: 100, stagger: 0.1, duration: 2 }, 0);
     let footerAnimProps = {
-      trigger: "#bg-footer",
+      trigger: "footer",
       toggleActions: "restart none reverse none",
-      start: "top",
-      end: "bottom",
+      start: "top bottom",
+      end: "+=400px",
     };
-    gsap.from("footer .bg0", { scrollTrigger: footerAnimProps, y: -800, duration: 1 })
-    gsap.from("footer .bg1", { scrollTrigger: footerAnimProps, y: -500, duration: 2 })
+    gsap.from("footer .bg0", { scrollTrigger: footerAnimProps, y: 100, duration: 1 })
+    gsap.from("footer .bg1", { scrollTrigger: footerAnimProps, y: 50, duration: .5 })
   });
 </script>
 <template lang="pug">
   main
+    header
     h1 hello #{name} :metal:
 
     div(id='bg-wrap')
@@ -49,11 +39,14 @@
         div(class='bg bg'+i)
 
     footer
-      #bg-footer
-        - for (var i=0; i<4; i++)
-          div(class='bg bg'+i)
+      - for (var i=0; i<2; i++)
+        div(class='bg bg'+i)
 </template>
 <style lang="stylus">
+  *
+    padding 0
+    margin 0
+
 	main
     height 3000px
     position relative
@@ -61,15 +54,23 @@
 
   footer
     width 100%
-    height 30%
+    height 400px
     position absolute
     bottom 0 
+    border 5px solid yellow
+
+    & > .bg
+      background-position top center
 
     #bg-footer
+      border 5px solid red
       position absolute
       top 60%
       width 100%
       height 100%
+
+      & > .bg
+        background-position top center
 
   #bg-wrap {
     width: 100%;
@@ -87,12 +88,10 @@
     background-repeat: no-repeat;
   }
 
-  //bspace = ( -6000px -4000px -2000px 0 )
 
   for num in (0..3)
     .bg{num}
       background-image url('/images/bg'+num+'.png')
-      //bottom bspace[num]
 
 	@media (min-width: 640px)
 		main
