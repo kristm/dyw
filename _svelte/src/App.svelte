@@ -13,7 +13,8 @@
       start: "top top",
       end: "45% 100%",
       markers: true,
-      toggleActions: "restart none reverse none",
+      onEnterBack: function() { gsap.to("#bg-wrap", { yPercent: 0, opacity: 1, duration: 2 }, 0); console.log("hey asshole");  },
+      onEnter: function () { console.log("OK") },
     });
 
     scene1.to("#bg-wrap", { yPercent: 150, duration: 2 }, 0);
