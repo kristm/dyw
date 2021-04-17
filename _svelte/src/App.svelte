@@ -12,7 +12,6 @@
       trigger: "main",
       start: "top top",
       end: "45% 100%",
-      markers: true,
       onEnterBack: function() { scene1.reverse() },
       onEnter: function () { scene1.play(0) },
     });
@@ -28,6 +27,7 @@
     };
     gsap.from("footer .bg0", { scrollTrigger: footerAnimProps, y: 100, duration: 1 })
     gsap.to("footer .bg1", { scrollTrigger: footerAnimProps, y: 10, duration: .5 })
+    gsap.to("footer .bgtree", { scrollTrigger: footerAnimProps, y: -200, duration: 1, delay: 1 })
   });
 </script>
 <template lang="pug">
@@ -36,10 +36,12 @@
     h1 hello #{name} :metal:
 
     div(id='bg-wrap')
+      .bg.bgtree
       - for (var i=0; i<4; i++)
         div(class='bg bg'+i)
 
     footer
+      .bg.bgtree
       - for (var i=0; i<2; i++)
         div(class='bg bg'+i)
 </template>
@@ -77,6 +79,10 @@
     height: 50%;
     position: absolute;
     top: -500px;
+
+    & > .bgtree {
+      top 10px 
+    }
   }
 
   .bg {
@@ -92,6 +98,10 @@
   for num in (0..3)
     .bg{num}
       background-image url('/images/bg'+num+'.png')
+
+  .bgtree
+    background-image url('/images/bgtree.png')
+    top 300px
 
 	@media (min-width: 640px)
 		main
