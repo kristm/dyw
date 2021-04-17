@@ -12,8 +12,7 @@
       trigger: "main",
       start: "top top",
       end: "45% 100%",
-      onEnterBack: function() { scene1.reverse() },
-      onEnter: function () { scene1.play(0) },
+      scrub: 1,
     });
 
     scene1.to("#bg-wrap", { yPercent: 150, duration: 2 }, 0);
@@ -24,6 +23,7 @@
       toggleActions: "restart none reverse none",
       start: "top bottom",
       end: "+=400px",
+      scrub: .5,
     };
     gsap.from("footer .bg0", { scrollTrigger: footerAnimProps, y: 100, duration: 1 })
     gsap.to("footer .bg1", { scrollTrigger: footerAnimProps, y: 10, duration: .5 })
