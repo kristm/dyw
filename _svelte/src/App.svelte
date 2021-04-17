@@ -13,8 +13,8 @@
       start: "top top",
       end: "45% 100%",
       markers: true,
-      onEnterBack: function() { gsap.to("#bg-wrap", { yPercent: 0, opacity: 1, duration: 2 }, 0); console.log("hey asshole");  },
-      onEnter: function () { console.log("OK") },
+      onEnterBack: function() { scene1.reverse() },
+      onEnter: function () { scene1.play(0) },
     });
 
     scene1.to("#bg-wrap", { yPercent: 150, duration: 2 }, 0);
@@ -27,7 +27,7 @@
       end: "+=400px",
     };
     gsap.from("footer .bg0", { scrollTrigger: footerAnimProps, y: 100, duration: 1 })
-    gsap.from("footer .bg1", { scrollTrigger: footerAnimProps, y: 50, duration: .5 })
+    gsap.to("footer .bg1", { scrollTrigger: footerAnimProps, y: 10, duration: .5 })
   });
 </script>
 <template lang="pug">
@@ -58,7 +58,6 @@
     height 400px
     position absolute
     bottom 0 
-    border 5px solid yellow
 
     & > .bg
       background-position top center
