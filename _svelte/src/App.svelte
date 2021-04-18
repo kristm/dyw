@@ -18,6 +18,16 @@
     scene1.to("#bg-wrap", { yPercent: 150, duration: 2 }, 0);
     scene1.to("#bg-wrap", {opacity:0, duration: 1},1);
 
+    let titleAnimProps = {
+      trigger: "h1",
+      toggleActions: "restart none reverse none",
+      start: "top 20%",
+      end: "+=2000",
+      pin: true,
+      scrub: 1,
+    };
+    gsap.to("h1", { scrollTrigger: titleAnimProps, scale: 1.2, duration: 2 })
+
     let footerAnimProps = {
       trigger: "footer",
       toggleActions: "restart none reverse none",
@@ -33,8 +43,8 @@
 <template lang="pug">
   .wrapper
     header
-      h1
 
+      h1 Distrubute your Wisdom. Learn at Work Week. May 24-28 2021
       div(id='bg-wrap')
         .bg.bgtree
         - for (var i=0; i<4; i++)
@@ -47,10 +57,15 @@
         div(class='bg bg'+i)
 </template>
 <style lang="stylus">
+  skyblue = #A7DED9
+
+  :global(body)
+    background-color skyblue
+
   .wrapper
     position relative
     overflow hidden
-    background-color #A7DED9
+    background-color skyblue
 
   header
     position absolute
@@ -58,6 +73,14 @@
     width 100%
     height 1000px
     z-index 2
+
+    h1
+      width 100%
+      height 30vh
+      position absolute
+      top 30vh
+      background url('/images/title.svg') no-repeat top center
+      color transparent
 
   main
     //border 5px solid yellow
