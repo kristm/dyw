@@ -73,11 +73,28 @@
           div(class='fg fg__'+val)
 
       .title-pre
+
     main
+      - var speakers = [{name: 'Noel Macatangay', thumb: 'noel'}, {name: 'Jane Barba', thumb: 'jane'}, {name: 'YojVestudio', thumb: 'yoj'}];
+      ul
+        each val in speakers
+          li
+            img(src='/images/speaker_'+val.thumb+'.jpg')
+            | #{val.name}  
+
     footer
       .bg.bgtree
       - for (var i=0; i<2; i++)
         div(class='bg bg'+i)
+
+    <svg width="0" height="0">
+      <defs>
+        <clipPath id="clipMask">
+          <path fill="#ffffff" stroke="#000000" stroke-width="1" stroke-miterlimit="5" d="M86.257,23.112c-0,-12.756 10.356,-23.112 23.112,-23.112c12.756,0 23.113,10.356 23.113,23.112c6.378,-11.047 20.525,-14.837 31.572,-8.459c11.047,6.378 14.837,20.525 8.459,31.572c11.048,-6.378 25.195,-2.588 31.573,8.46c6.378,11.047 2.587,25.194 -8.46,31.572c12.756,-0 23.112,10.356 23.112,23.112c0,12.756 -10.356,23.113 -23.112,23.113c11.047,6.378 14.838,20.525 8.46,31.572c-6.378,11.047 -20.525,14.837 -31.573,8.459c6.378,11.048 2.588,25.195 -8.459,31.573c-11.047,6.378 -25.194,2.587 -31.572,-8.46c-0,12.756 -10.357,23.112 -23.113,23.112c-12.756,0 -23.112,-10.356 -23.112,-23.112c-6.378,11.047 -20.525,14.838 -31.572,8.46c-11.048,-6.378 -14.838,-20.525 -8.46,-31.573c-11.047,6.378 -25.194,2.588 -31.572,-8.459c-6.378,-11.047 -2.588,-25.194 8.459,-31.572c-12.756,-0 -23.112,-10.357 -23.112,-23.113c0,-12.756 10.356,-23.112 23.112,-23.112c-11.047,-6.378 -14.837,-20.525 -8.459,-31.572c6.378,-11.048 20.525,-14.838 31.572,-8.46c-6.378,-11.047 -2.588,-25.194 8.46,-31.572c11.047,-6.378 25.194,-2.588 31.572,8.459Z"/>
+        </clipPath>
+      </defs>
+    </svg>
+
 </template>
 <style lang="stylus">
   skyblue = #A7DED9
@@ -121,6 +138,27 @@
     background url('/images/clouds.png') no-repeat top center
     background-size 100%
     z-index 1
+
+    ul
+      display flex
+      width 80%
+      margin 3000px auto 0
+      padding 0
+      flex-wrap wrap
+      list-style-type none
+      justify-content space-between
+
+    li
+      font-size 2rem
+      text-align center
+      margin 15rem 10rem
+      display flex
+      flex-direction column
+
+    img
+      width: 218px
+      height: 218px
+      clip-path: url(#clipMask)
 
   #fg-wrap
     width 100%
