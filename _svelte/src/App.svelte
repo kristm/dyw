@@ -9,14 +9,15 @@
     let scene1 = gsap.timeline(); // TODO: add callback to return to original Y position (-500)
     ScrollTrigger.create({
       animation: scene1,
-      trigger: "header",
+      trigger: "#bg-wrap",
       start: "top top",
-      end: "45% 100%",
+      end: "45%",
+      markers: true,
       scrub: 1,
     });
 
     scene1.to("#bg-wrap", { yPercent: 150, duration: 2 }, 0);
-    scene1.to("#bg-wrap", {opacity:0, duration: 1},.5);
+    scene1.to("#bg-wrap", {opacity:0, duration: 1},1);
 
     let footerAnimProps = {
       trigger: "footer",
@@ -33,12 +34,12 @@
 <template lang="pug">
   .wrapper
     header
-    h1 hello #{name} :metal:
+      h1 hello #{name} :metal:
 
-    div(id='bg-wrap')
-      .bg.bgtree
-      - for (var i=0; i<4; i++)
-        div(class='bg bg'+i)
+      div(id='bg-wrap')
+        .bg.bgtree
+        - for (var i=0; i<4; i++)
+          div(class='bg bg'+i)
 
     main
     footer
@@ -50,40 +51,26 @@
   .wrapper
     position relative
     overflow hidden
+    background-color #A7DED9
+
 
   header
     position absolute
     top 0
     width 100%
-    height 2000px
+    height 1000px
     border 5px solid red
 
   main
+    border 5px solid yellow
     width 100%
-    height 2000px
-
-  footer
-    width 100%
-    height 400px
-    position absolute
-    bottom 0 
-
-    & > .bg
-      background-position top center
-
-    #bg-footer
-      border 5px solid red
-      position absolute
-      top 60%
-      width 100%
-      height 100%
-
-      & > .bg
-        background-position top center
+    height 4000px
 
   #bg-wrap {
     border 5px solid green
     height 1000px 
+    position relative
+    top 0
 
     & > .bgtree {
       top 10px 
@@ -91,10 +78,10 @@
   }
 
   .bg {
+    border 2px solid blue
     width: 100%;
     height: 100%;
     position: absolute;
-    bottom: 0;
     background-position: bottom center;
     background-repeat: no-repeat;
   }
@@ -107,6 +94,26 @@
   .bgtree
     background-image url('/images/bgtree.png')
     top 300px
+
+
+  footer
+    border 5px solid black
+    width 100%
+    height 400px
+    position absolute
+    bottom 0
+
+    & > .bg
+      background-position top center
+
+    #bg-footer
+      position absolute
+      top 60%
+      width 100%
+      height 100%
+
+      & > .bg
+        background-position top center
 
 	@media (min-width: 640px)
 		main
