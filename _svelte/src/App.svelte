@@ -12,7 +12,6 @@
       trigger: "#bg-wrap",
       start: "top top",
       end: "45%",
-      markers: true,
       scrub: 1,
     });
 
@@ -34,7 +33,7 @@
 <template lang="pug">
   .wrapper
     header
-      h1 hello #{name} :metal:
+      h1
 
       div(id='bg-wrap')
         .bg.bgtree
@@ -53,21 +52,25 @@
     overflow hidden
     background-color #A7DED9
 
-
   header
     position absolute
     top 0
     width 100%
     height 1000px
-    border 5px solid red
+    z-index 2
 
   main
-    border 5px solid yellow
+    //border 5px solid yellow
+    position relative
+    top 500px
     width 100%
     height 4000px
+    background url('/images/clouds.png') no-repeat top center
+    background-size 100%
+    z-index 1
 
   #bg-wrap {
-    border 5px solid green
+    //border 5px solid green
     height 1000px 
     position relative
     top 0
@@ -78,7 +81,7 @@
   }
 
   .bg {
-    border 2px solid blue
+    //border 2px solid blue
     width: 100%;
     height: 100%;
     position: absolute;
@@ -97,7 +100,7 @@
 
 
   footer
-    border 5px solid black
+    //border 2px solid black
     width 100%
     height 400px
     position absolute
