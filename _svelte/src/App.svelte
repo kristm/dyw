@@ -87,7 +87,7 @@
       .title-pre
 
     main
-      - var speakers = [{name: 'Noel Macatangay', thumb: 'noel'}, {name: 'Jane Barba', thumb: 'jane'}, {name: 'YojVestudio', thumb: 'yoj'}, {name: 'Gerard Cruz', thumb: 'gerard'}];
+      - var speakers = [{name: 'Noel Macatangay', thumb: 'noel'}, {name: 'Jane Barba', thumb: 'jane'}, {name: 'YojVestudio', thumb: 'yoj'}, {name: 'Gerard Cruz', thumb: 'gerard'}, {name: 'Agung Yuliaji', thumb: 'agung'}, {name: 'Gifa Eriyanto', thumb: 'gifa'}];
       ul
         each val in speakers
           li
@@ -136,22 +136,20 @@
     background url('/images/title.svg') no-repeat top center
 
   .title-pre
-    //opacity 0.5
     filter blur(2px)
     transform scale(.5)
     background url('/images/title_pre.svg') no-repeat top center
 
   main
     //border 5px solid yellow
-    position relative
-    top 500px
     width 100%
-    height 4000px
+    margin 500px 0
     background url('/images/clouds.png') no-repeat top center
     background-size 100%
     z-index 1
 
     ul
+      //border 2px solid white
       display flex
       width 80%
       margin 3000px auto 0
@@ -260,15 +258,6 @@
 
     & > .bg
       background-position top center
-
-    #bg-footer
-      position absolute
-      top 60%
-      width 100%
-      height 100%
-
-      & > .bg
-        background-position top center
 
 	@media (min-width: 640px)
 		main
