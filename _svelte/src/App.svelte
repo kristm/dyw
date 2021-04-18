@@ -1,11 +1,16 @@
 <script>
   import { onMount } from 'svelte';
   import { gsap } from 'gsap';
-	export let name;
 
   gsap.registerPlugin(ScrollTrigger);
 
   onMount(() => {
+    gsap.utils.toArray("li").forEach((speaker, i) => {
+      gsap.set(speaker, {
+        y: gsap.utils.random(-100, 100),
+      });
+    });
+
     let scene1 = gsap.timeline(); // TODO: add callback to return to original Y position (-500)
     ScrollTrigger.create({
       animation: scene1,
@@ -46,6 +51,21 @@
     };
     gsap.to("h1", { scrollTrigger: titleAnimProps, scale: 1.2, duration: 2 })
 
+    // https://greensock.com/forums/topic/24288-staggered-animations-in-scrolltrigger/
+    // https://codepen.io/GreenSock/pen/qBEPZeG?editors=0010
+    // let speakerAnimProps = {
+    //   trigger: "ul",
+    //   toggleActions: "restart none reverse none",
+    //   start: "top center",
+    //   end: "+=2000",
+    //   stagger: {
+    //     each: 0.5,
+    //     from: "random"
+    //   },
+    //   markers: true
+    // };
+    // gsap.to("li", { scrollTrigger: speakerAnimProps, y: "+=20", duration: 1 });
+
     let footerAnimProps = {
       trigger: "footer",
       toggleActions: "restart none reverse none",
@@ -75,7 +95,7 @@
       .title-pre
 
     main
-      - var speakers = [{name: 'Noel Macatangay', thumb: 'noel'}, {name: 'Jane Barba', thumb: 'jane'}, {name: 'YojVestudio', thumb: 'yoj'}];
+      - var speakers = [{name: 'Noel Macatangay', thumb: 'noel'}, {name: 'Jane Barba', thumb: 'jane'}, {name: 'YojVestudio', thumb: 'yoj'}, {name: 'Gerard Cruz', thumb: 'gerard'}];
       ul
         each val in speakers
           li
