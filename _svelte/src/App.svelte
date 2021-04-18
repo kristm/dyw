@@ -259,7 +259,8 @@
     & > .bg
       background-position top center
 
-	@media (min-width: 640px)
-		main
-			max-width none
+  @media (max-width: 640px)
+    main > ul
+      justify-content space-around
+
 </style>
