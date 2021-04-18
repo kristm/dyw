@@ -15,6 +15,23 @@
       scrub: 1,
     });
 
+    let fgLeftProps = {
+      xPercent: -100,
+      yPercent: 100,
+      duration: 1
+    };
+
+    let fgRightProps = {
+      xPercent: 100,
+      yPercent: 100,
+      duration: 0.8
+    };
+
+    scene1.to(".fg__green", fgLeftProps);
+    scene1.to(".fg__yellow", fgLeftProps, 0.1);
+    scene1.to(".fg__pink", { yPercent: 100, opacity: 0, duration: 1 }, 0.1);
+    scene1.to(".fg__ryellow", fgRightProps,0.1);
+    scene1.to(".fg__rbyellow", fgRightProps, 0.15);
     scene1.to("#bg-wrap", { yPercent: 150, duration: 2 }, 0);
     scene1.to("#bg-wrap", {opacity:0, duration: 1},1);
 
@@ -49,6 +66,10 @@
         .bg.bgtree
         - for (var i=0; i<4; i++)
           div(class='bg bg'+i)
+
+      div(id='fg-wrap')
+        each val in ['pink', 'green', 'yellow', 'ryellow', 'rbyellow']
+          div(class='fg fg__'+val)
 
     main
     footer
@@ -92,6 +113,56 @@
     background-size 100%
     z-index 1
 
+  #fg-wrap
+    width 100%
+    height 80vh
+    position absolute
+    bottom 0
+
+  .fg {
+    background-repeat no-repeat
+    background-size 90%
+    width 50vh
+    height 100%
+    position absolute
+
+    &__pink {
+      background-image url('/images/left_pink.png')
+      background-position bottom left
+      bottom 0
+    }
+
+    &__yellow {
+      background-image url('/images/left_yellow.png')
+      background-position top left
+      top 40% 
+    }
+
+    &__ryellow {
+      background-image url('/images/right_yellow.png')
+      background-position top right
+      background-size 80%
+      height 70%
+      bottom 0
+      right -20px
+    }
+
+    &__rbyellow {
+      background-image url('/images/right_bottom_yellow.png')
+      background-position top right
+      height 70%
+      bottom -50px
+      right -20px
+    }
+
+    &__green {
+      background-image url('/images/left_green.png')
+      background-position top left
+      top 20%
+    }
+  }
+
+
   #bg-wrap {
     //border 5px solid green
     height 1000px 
@@ -111,7 +182,6 @@
     background-position: bottom center;
     background-repeat: no-repeat;
   }
-
 
   for num in (0..3)
     .bg{num}
