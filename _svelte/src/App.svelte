@@ -104,13 +104,13 @@
       top 30vh
       color transparent
   h1
-    background url('/images/title.svg') no-repeat top center
+    background url('/assets/images/title.svg') no-repeat top center
 
   .title-pre
     //opacity 0.5
     filter blur(2px)
     transform scale(.5)
-    background url('/images/title_pre.svg') no-repeat top center
+    background url('/assets/images/title_pre.svg') no-repeat top center
 
   main
     //border 5px solid yellow
@@ -118,7 +118,7 @@
     top 500px
     width 100%
     height 4000px
-    background url('/images/clouds.png') no-repeat top center
+    background url('/assets/images/clouds.png') no-repeat top center
     background-size 100%
     z-index 1
 
@@ -136,19 +136,19 @@
     position absolute
 
     &__pink {
-      background-image url('/images/left_pink.png')
+      background-image url('/assets/images/left_pink.png')
       background-position bottom left
       bottom 0
     }
 
     &__yellow {
-      background-image url('/images/left_yellow.png')
+      background-image url('/assets/images/left_yellow.png')
       background-position top left
       top 40% 
     }
 
     &__ryellow {
-      background-image url('/images/right_yellow.png')
+      background-image url('/assets/images/right_yellow.png')
       background-position top right
       background-size 80%
       height 70%
@@ -157,7 +157,7 @@
     }
 
     &__rbyellow {
-      background-image url('/images/right_bottom_yellow.png')
+      background-image url('/assets/images/right_bottom_yellow.png')
       background-position top right
       height 70%
       bottom -50px
@@ -165,7 +165,7 @@
     }
 
     &__green {
-      background-image url('/images/left_green.png')
+      background-image url('/assets/images/left_green.png')
       background-position top left
       top 20%
     }
@@ -194,10 +194,10 @@
 
   for num in (0..3)
     .bg{num}
-      background-image url('/images/bg'+num+'.png')
+      background-image url('/assets/images/bg'+num+'.png')
 
   .bgtree
-    background-image url('/images/bgtree.png')
+    background-image url('/assets/images/bgtree.png')
     top 300px
 
 
