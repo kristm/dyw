@@ -32,6 +32,7 @@
     scene1.to(".fg__pink", { yPercent: 100, opacity: 0, duration: 1 }, 0.1);
     scene1.to(".fg__ryellow", fgRightProps,0.1);
     scene1.to(".fg__rbyellow", fgRightProps, 0.15);
+    scene1.to(".title-pre", { opacity: 0, duration: 0.2 }, 0);
     scene1.to("#bg-wrap", { yPercent: 150, duration: 2 }, 0);
     scene1.to("#bg-wrap", {opacity:0, duration: 1},1);
 
@@ -71,6 +72,7 @@
         each val in ['pink', 'green', 'yellow', 'ryellow', 'rbyellow']
           div(class='fg fg__'+val)
 
+      .title-pre
     main
     footer
       .bg.bgtree
@@ -95,13 +97,20 @@
     height 1000px
     z-index 2
 
-    h1
+    h1, .title-pre
       width 100%
       height 30vh
       position absolute
       top 30vh
-      background url('/images/title.svg') no-repeat top center
       color transparent
+  h1
+    background url('/images/title.svg') no-repeat top center
+
+  .title-pre
+    //opacity 0.5
+    filter blur(2px)
+    transform scale(.5)
+    background url('/images/title_pre.svg') no-repeat top center
 
   main
     //border 5px solid yellow
