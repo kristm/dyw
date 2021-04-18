@@ -46,10 +46,6 @@
         div(class='bg bg'+i)
 </template>
 <style lang="stylus">
-  *
-    padding 0
-    margin 0
-
 	main
     height 3000px
     position relative
