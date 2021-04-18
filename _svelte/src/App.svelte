@@ -51,20 +51,12 @@
     };
     gsap.to("h1", { scrollTrigger: titleAnimProps, scale: 1.2, duration: 2 })
 
-    // https://greensock.com/forums/topic/24288-staggered-animations-in-scrolltrigger/
-    // https://codepen.io/GreenSock/pen/qBEPZeG?editors=0010
-    // let speakerAnimProps = {
-    //   trigger: "ul",
-    //   toggleActions: "restart none reverse none",
-    //   start: "top center",
-    //   end: "+=2000",
-    //   stagger: {
-    //     each: 0.5,
-    //     from: "random"
-    //   },
-    //   markers: true
-    // };
-    // gsap.to("li", { scrollTrigger: speakerAnimProps, y: "+=20", duration: 1 });
+    ScrollTrigger.batch("li", {
+      interval: 1,
+      batchMax: 2,
+      onEnter: batch => gsap.to(batch, {y: "-=20", duration: 1.5, stagger: 0.5}),
+      onEnterBack: batch => gsap.to(batch, {y: "+=20", duration: 1.5, stagger: 0.5}),
+    });
 
     let footerAnimProps = {
       trigger: "footer",
