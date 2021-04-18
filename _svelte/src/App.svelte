@@ -9,7 +9,7 @@
     let scene1 = gsap.timeline(); // TODO: add callback to return to original Y position (-500)
     ScrollTrigger.create({
       animation: scene1,
-      trigger: "main",
+      trigger: "header",
       start: "top top",
       end: "45% 100%",
       scrub: 1,
@@ -31,7 +31,7 @@
   });
 </script>
 <template lang="pug">
-  main
+  .wrapper
     header
     h1 hello #{name} :metal:
 
@@ -40,16 +40,27 @@
       - for (var i=0; i<4; i++)
         div(class='bg bg'+i)
 
+    main
     footer
       .bg.bgtree
       - for (var i=0; i<2; i++)
         div(class='bg bg'+i)
 </template>
 <style lang="stylus">
-	main
-    height 3000px
+  .wrapper
     position relative
     overflow hidden
+
+  header
+    position absolute
+    top 0
+    width 100%
+    height 2000px
+    border 5px solid red
+
+  main
+    width 100%
+    height 2000px
 
   footer
     width 100%
@@ -71,10 +82,8 @@
         background-position top center
 
   #bg-wrap {
-    width: 100%;
-    height: 50%;
-    position: absolute;
-    top: -500px;
+    border 5px solid green
+    height 1000px 
 
     & > .bgtree {
       top 10px 
