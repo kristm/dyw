@@ -123,6 +123,14 @@
   :global(body)
     background-color skyblue
 
+  @font-face
+    font-family 'NoWorries'
+    font-style normal
+    font-weight 400
+    font-display swap
+    src url("/fonts/NoWorries.woff")
+    src url("/fonts/NoWorries.woff2")
+
   .wrapper
     position relative
     overflow hidden
@@ -158,7 +166,7 @@
     z-index 1
 
     h3
-      font-family "No worries"
+      font-family NoWorries
       font-size 4rem
       margin 500px 0
 
@@ -167,7 +175,6 @@
       display flex
       width 80%
       margin 0 auto
-      padding 0
       flex-wrap wrap
       list-style-type none
       justify-content space-between
