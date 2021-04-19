@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { gsap } from 'gsap';
+  import WavyText from './WavyText.svelte';
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -49,13 +50,20 @@
       pin: true,
       scrub: 1,
     };
-    gsap.to("h1", { scrollTrigger: titleAnimProps, scale: 1.2, duration: 2 })
+    gsap.to("h1", { scrollTrigger: titleAnimProps, scale: 1.4, duration: 2 })
 
     ScrollTrigger.batch("li", {
       interval: 1,
       batchMax: 2,
       onEnter: batch => gsap.to(batch, {y: "-=20", duration: 1.5, stagger: 0.5}),
       onEnterBack: batch => gsap.to(batch, {y: "+=20", duration: 1.5, stagger: 0.5}),
+    });
+
+    ScrollTrigger.batch(".speaker-name", {
+      interval: 1,
+      batchMax: 2,
+      onEnter: batch => gsap.to(batch, {y: "+=5", duration: 1, stagger: 0.5}),
+      onEnterBack: batch => gsap.to(batch, {y: "-=2", duration: 1, stagger: 0.5}),
     });
 
     let footerAnimProps = {
@@ -87,12 +95,12 @@
       .title-pre
 
     main
-      - var speakers = [{name: 'Noel Macatangay', thumb: 'noel'}, {name: 'Jane Barba', thumb: 'jane'}, {name: 'YojVestudio', thumb: 'yoj'}, {name: 'Gerard Cruz', thumb: 'gerard'}, {name: 'Agung Yuliaji', thumb: 'agung'}, {name: 'Gifa Eriyanto', thumb: 'gifa'}];
+      - var speakers = [{name: 'Noel Macatangay', thumb: 'noel'}, {name: 'Jane Barba', thumb: 'jane'}, {name: 'Yoj Vestudio', thumb: 'yoj'}, {name: 'Gerard Cruz', thumb: 'gerard'}, {name: 'Agung Yuliaji', thumb: 'agung'}, {name: 'Gifa Eriyanto', thumb: 'gifa'}];
       ul
         each val in speakers
           li
             img(src='/images/speaker_'+val.thumb+'.jpg')
-            | #{val.name}  
+            WavyText(name=val.name)
 
     footer
       .bg.bgtree
@@ -130,7 +138,7 @@
       width 100%
       height 30vh
       position absolute
-      top 30vh
+      top 40vh
       color transparent
   h1
     background url('/images/title.svg') no-repeat top center
@@ -161,7 +169,7 @@
     li
       font-size 2rem
       text-align center
-      margin 15rem 10rem
+      margin 15rem 8rem
       display flex
       flex-direction column
 
