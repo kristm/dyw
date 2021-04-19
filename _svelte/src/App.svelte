@@ -1,11 +1,17 @@
 <script>
   import { onMount } from 'svelte';
   import { gsap } from 'gsap';
-	export let name;
+  import WavyText from './WavyText.svelte';
 
   gsap.registerPlugin(ScrollTrigger);
 
   onMount(() => {
+    gsap.utils.toArray("li").forEach((speaker, i) => {
+      gsap.set(speaker, {
+        y: gsap.utils.random(-100, 100),
+      });
+    });
+
     let scene1 = gsap.timeline(); // TODO: add callback to return to original Y position (-500)
     ScrollTrigger.create({
       animation: scene1,
@@ -44,7 +50,21 @@
       pin: true,
       scrub: 1,
     };
-    gsap.to("h1", { scrollTrigger: titleAnimProps, scale: 1.2, duration: 2 })
+    gsap.to("h1", { scrollTrigger: titleAnimProps, scale: 1.4, duration: 2 })
+
+    ScrollTrigger.batch("li", {
+      interval: 1,
+      batchMax: 2,
+      onEnter: batch => gsap.to(batch, {y: "-=20", duration: 1.5, stagger: 0.5}),
+      onEnterBack: batch => gsap.to(batch, {y: "+=20", duration: 1.5, stagger: 0.5}),
+    });
+
+    ScrollTrigger.batch(".speaker-name", {
+      interval: 1,
+      batchMax: 2,
+      onEnter: batch => gsap.to(batch, {y: "+=5", duration: 1, stagger: 0.5}),
+      onEnterBack: batch => gsap.to(batch, {y: "-=2", duration: 1, stagger: 0.5}),
+    });
 
     let footerAnimProps = {
       trigger: "footer",
@@ -73,11 +93,29 @@
           div(class='fg fg__'+val)
 
       .title-pre
+
     main
+      - var speakers = [{name: 'Noel Macatangay', thumb: 'noel'}, {name: 'Jane Barba', thumb: 'jane'}, {name: 'Yoj Vestudio', thumb: 'yoj'}, {name: 'Gerard Cruz', thumb: 'gerard'}, {name: 'Agung Yuliaji', thumb: 'agung'}, {name: 'Gifa Eriyanto', thumb: 'gifa'}];
+      h3 Speakers
+      ul
+        each val in speakers
+          li
+            img(src='/dyw/assets/images/speaker_'+val.thumb+'.jpg')
+            WavyText(name=val.name)
+
     footer
       .bg.bgtree
       - for (var i=0; i<2; i++)
         div(class='bg bg'+i)
+
+    <svg width="0" height="0">
+      <defs>
+        <clipPath id="clipMask">
+          <path fill="#ffffff" stroke="#000000" stroke-width="1" stroke-miterlimit="5" d="M86.257,23.112c-0,-12.756 10.356,-23.112 23.112,-23.112c12.756,0 23.113,10.356 23.113,23.112c6.378,-11.047 20.525,-14.837 31.572,-8.459c11.047,6.378 14.837,20.525 8.459,31.572c11.048,-6.378 25.195,-2.588 31.573,8.46c6.378,11.047 2.587,25.194 -8.46,31.572c12.756,-0 23.112,10.356 23.112,23.112c0,12.756 -10.356,23.113 -23.112,23.113c11.047,6.378 14.838,20.525 8.46,31.572c-6.378,11.047 -20.525,14.837 -31.573,8.459c6.378,11.048 2.588,25.195 -8.459,31.573c-11.047,6.378 -25.194,2.587 -31.572,-8.46c-0,12.756 -10.357,23.112 -23.113,23.112c-12.756,0 -23.112,-10.356 -23.112,-23.112c-6.378,11.047 -20.525,14.838 -31.572,8.46c-11.048,-6.378 -14.838,-20.525 -8.46,-31.573c-11.047,6.378 -25.194,2.588 -31.572,-8.459c-6.378,-11.047 -2.588,-25.194 8.459,-31.572c-12.756,-0 -23.112,-10.357 -23.112,-23.113c0,-12.756 10.356,-23.112 23.112,-23.112c-11.047,-6.378 -14.837,-20.525 -8.459,-31.572c6.378,-11.048 20.525,-14.838 31.572,-8.46c-6.378,-11.047 -2.588,-25.194 8.46,-31.572c11.047,-6.378 25.194,-2.588 31.572,8.459Z"/>
+        </clipPath>
+      </defs>
+    </svg>
+
 </template>
 <style lang="stylus">
   skyblue = #A7DED9
@@ -85,14 +123,21 @@
   :global(body)
     background-color skyblue
 
+  @font-face
+    font-family 'NoWorries'
+    font-style normal
+    font-weight 400
+    font-display swap
+    src url("/dyw/assets/fonts/NoWorries.woff")
+    src url("/dyw/assets/fonts/NoWorries.woff2")
+
   .wrapper
     position relative
     overflow hidden
     background-color skyblue
 
   header
-    position absolute
-    top 0
+    //border 5px solid red
     width 100%
     height 1000px
     z-index 2
@@ -101,32 +146,58 @@
       width 100%
       height 30vh
       position absolute
-      top 30vh
+      top 40vh
       color transparent
   h1
     background url('/dyw/assets/images/title.svg') no-repeat top center
 
   .title-pre
-    //opacity 0.5
     filter blur(2px)
     transform scale(.5)
     background url('/dyw/assets/images/title_pre.svg') no-repeat top center
 
   main
     //border 5px solid yellow
-    position relative
-    top 500px
     width 100%
-    height 4000px
+    padding 2000px 0 500px
     background url('/dyw/assets/images/clouds.png') no-repeat top center
     background-size 100%
+    text-align center
     z-index 1
+
+    h3
+      font-family NoWorries
+      font-size 4rem
+      margin 500px 0
+
+    ul
+      //border 2px solid white
+      display flex
+      width 80%
+      margin 0 auto
+      flex-wrap wrap
+      list-style-type none
+      justify-content space-between
+      background url('/dyw/assets/images/clouds.png') no-repeat top center
+      background-size contain
+
+    li
+      font-size 2rem
+      text-align center
+      margin 15rem 8rem
+      display flex
+      flex-direction column
+
+    img
+      width: 218px
+      height: 218px
+      clip-path: url(#clipMask)
 
   #fg-wrap
     width 100%
     height 80vh
     position absolute
-    bottom 0
+    top 40vh
 
   .fg {
     background-repeat no-repeat
@@ -211,16 +282,8 @@
     & > .bg
       background-position top center
 
-    #bg-footer
-      position absolute
-      top 60%
-      width 100%
-      height 100%
+  @media (max-width: 640px)
+    main > ul
+      justify-content space-around
 
-      & > .bg
-        background-position top center
-
-	@media (min-width: 640px)
-		main
-			max-width none
 </style>
