@@ -96,6 +96,7 @@
 
     main
       - var speakers = [{name: 'Noel Macatangay', thumb: 'noel'}, {name: 'Jane Barba', thumb: 'jane'}, {name: 'Yoj Vestudio', thumb: 'yoj'}, {name: 'Gerard Cruz', thumb: 'gerard'}, {name: 'Agung Yuliaji', thumb: 'agung'}, {name: 'Gifa Eriyanto', thumb: 'gifa'}];
+      h3 Speakers
       ul
         each val in speakers
           li
@@ -128,8 +129,7 @@
     background-color skyblue
 
   header
-    position absolute
-    top 0
+    //border 5px solid red
     width 100%
     height 1000px
     z-index 2
@@ -151,20 +151,28 @@
   main
     //border 5px solid yellow
     width 100%
-    margin 500px 0
+    padding 2000px 0 500px
     background url('/images/clouds.png') no-repeat top center
     background-size 100%
+    text-align center
     z-index 1
+
+    h3
+      font-family "No worries"
+      font-size 4rem
+      margin 500px 0
 
     ul
       //border 2px solid white
       display flex
       width 80%
-      margin 3000px auto 0
+      margin 0 auto
       padding 0
       flex-wrap wrap
       list-style-type none
       justify-content space-between
+      background url('/images/clouds.png') no-repeat top center
+      background-size contain
 
     li
       font-size 2rem
@@ -182,7 +190,7 @@
     width 100%
     height 80vh
     position absolute
-    bottom 0
+    top 40vh
 
   .fg {
     background-repeat no-repeat

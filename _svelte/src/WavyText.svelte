@@ -11,5 +11,5 @@
   text
     font-size 3rem
     font-family "Yellowtail"
-    color #272C65
+    fill #272C65
 </style>
