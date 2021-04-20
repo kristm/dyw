@@ -140,7 +140,7 @@
   header
     //border 5px solid red
     width 100%
-    height 100vh
+    height 1000px
     z-index 2
 
     h1, .title-pre
@@ -249,7 +249,7 @@
     //border 5px solid green
     height 1000px 
     position relative
-    bottom -10vh //hack?
+    bottom 0
     //top 10vh
 
     & > .bgtree {
@@ -299,5 +299,8 @@
     
       h3
         font-size 3rem
+
+    #fg-wrap .fg__pink
+      display none
 
 </style>
