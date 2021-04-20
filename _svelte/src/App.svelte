@@ -6,6 +6,7 @@
   gsap.registerPlugin(ScrollTrigger);
 
   onMount(() => {
+    gsap.set("h1", {opacity: 1});
     gsap.utils.toArray("li").forEach((speaker, i) => {
       gsap.set(speaker, {
         y: gsap.utils.random(-100, 100),
@@ -139,7 +140,7 @@
   header
     //border 5px solid red
     width 100%
-    height 1000px
+    height 100vh
     z-index 2
 
     h1, .title-pre
@@ -150,6 +151,7 @@
       color transparent
   h1
     background url('/dyw/assets/images/title.svg') no-repeat top center
+    opacity 0
 
   .title-pre
     filter blur(2px)
@@ -184,7 +186,7 @@
     li
       font-size 2rem
       text-align center
-      margin 15rem 8rem
+      margin 15rem 2rem
       display flex
       flex-direction column
 
@@ -237,7 +239,7 @@
 
     &__green {
       background-image url('/dyw/assets/images/left_green.png')
-      background-position top left
+      background-position -50px 0
       top 20%
     }
   }
@@ -247,7 +249,8 @@
     //border 5px solid green
     height 1000px 
     position relative
-    top 0
+    bottom -10vh //hack?
+    //top 10vh
 
     & > .bgtree {
       top 10px 
@@ -282,8 +285,19 @@
     & > .bg
       background-position top center
 
+  @media (max-width: 800px)
+    main
+      ul
+        width 100%
+      li
+        margin 10rem 0
+
   @media (max-width: 640px)
-    main > ul
-      justify-content space-around
+    main
+      ul
+        justify-content space-around
+    
+      h3
+        font-size 3rem
 
 </style>
