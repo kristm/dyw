@@ -300,7 +300,4 @@
       h3
         font-size 3rem
 
-    #fg-wrap .fg__pink
-      display none
-
 </style>
