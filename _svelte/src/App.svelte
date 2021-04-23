@@ -133,6 +133,9 @@
     src url("/fonts/NoWorries.woff2")
 
   .wrapper
+    border 5px solid white
+    max-width 1500px
+    margin auto
     position relative
     overflow hidden
     background-color skyblue
@@ -284,6 +287,10 @@
 
     & > .bg
       background-position top center
+
+  @media (max-width: 1600px)
+    .wrapper
+      border none
 
   @media (max-width: 800px)
     main
