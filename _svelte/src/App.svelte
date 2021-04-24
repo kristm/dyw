@@ -17,8 +17,9 @@
     ScrollTrigger.create({
       animation: scene1,
       trigger: "#bg-wrap",
-      start: "top top",
+      start: "top",
       end: "45%",
+      markers: false,
       scrub: 1,
     });
 
@@ -133,8 +134,7 @@
     src url("/fonts/NoWorries.woff2")
 
   .wrapper
-    border 5px solid white
-    max-width 1500px
+    border none
     margin auto
     position relative
     overflow hidden
@@ -252,8 +252,7 @@
     //border 5px solid green
     height 1000px 
     position relative
-    bottom 0
-    //top 10vh
+    //bottom -200px
 
     & > .bgtree {
       top 10px 
@@ -288,26 +287,46 @@
     & > .bg
       background-position top center
 
-  @media (max-width: 1600px)
-    .wrapper
-      border none
-
-  @media (max-width: 800px)
-    main
-      ul
-        width 100%
-      li
-        margin 10rem 0
-
-  @media (max-width: 640px)
+  @media (min-width: 640px)
     main
       ul
         justify-content space-around
-    
+      li
+        margin 10rem 0
+
       h3
         font-size 3rem
 
     #fg-wrap .fg__pink
       display none
+
+  @media (min-width: 800px)
+    #fg-wrap .fg__pink
+      display unset
+
+    main
+      ul
+        width 100%
+      li
+        margin 10rem 5rem
+
+
+  @media (min-width: 1400px)
+    main
+      h3
+        font-size 4.5rem
+
+
+  @media (min-width: 1600px)
+    .wrapper
+      max-width 1500px
+      border 10px solid white
+
+    #fg-wrap .fg__pink
+      display none
+
+    #bg-wrap
+      height 100vh
+      bottom 0
 
 </style>
