@@ -96,8 +96,6 @@
       .title-pre
 
     main
-      h2 Distribute Your Wisdom is an learning conference for members of the Quipper Global Product Team. The current pandemic situation has challenged all of us in our work and everyday lives. But it also became an opportunity for growth and discovery. Join us in a week of sharing with the Global Product Team.
-
       - var speakers = [{name: 'Noel Macatangay', thumb: 'noel'}, {name: 'Jane Barba', thumb: 'jane'}, {name: 'Yoj Vestudio', thumb: 'yoj'}, {name: 'Gerard Cruz', thumb: 'gerard'}, {name: 'Agung Yuliaji', thumb: 'agung'}, {name: 'Gifa Eriyanto', thumb: 'gifa'}];
       h3 Speakers
       ul
@@ -138,7 +136,6 @@
     border 5px solid white
     max-width 1500px
     margin auto
-    text-align center
     position relative
     overflow hidden
     background-color skyblue
@@ -158,14 +155,6 @@
   h1
     background url('/images/title.svg') no-repeat top center
     opacity 0
-
-  h2
-    font-size 2rem
-    width 60%
-    color white
-    margin auto
-    font-family Blogger Sans
-    color #272C65
 
   .title-pre
     filter blur(2px)
