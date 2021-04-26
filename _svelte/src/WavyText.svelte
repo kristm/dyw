@@ -24,4 +24,7 @@
     font-size 3rem
     font-family Yellowtail, Milkshake
     fill #272C65
+
+    @media (min-width: 1400px)
+      font-size 4rem
 </style>
