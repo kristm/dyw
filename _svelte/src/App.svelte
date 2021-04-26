@@ -1,11 +1,15 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onMount, tick } from 'svelte';
   import { gsap } from 'gsap';
+  import Loader from './Loader.svelte';
   import WavyText from './WavyText.svelte';
+  let loaded = false;
 
   gsap.registerPlugin(ScrollTrigger);
 
-  onMount(() => {
+  onMount(async () => {
+    loaded = true;
+    await tick(); //ensure that DOM is ready for gsap
     gsap.set("h1", {opacity: 1});
     gsap.utils.toArray("li").forEach((speaker, i) => {
       gsap.set(speaker, {
@@ -78,45 +82,48 @@
     gsap.from("footer .bg0", { scrollTrigger: footerAnimProps, y: 100, duration: 1 })
     gsap.to("footer .bg1", { scrollTrigger: footerAnimProps, y: 10, duration: .5 })
     gsap.to("footer .bgtree", { scrollTrigger: footerAnimProps, y: -200, duration: 1, delay: 1 })
+    $: console.log("loaded ", loaded);
   });
 </script>
 <template lang="pug">
   .wrapper
-    header
+    +if('loaded')
+      header
+        h1 Distrubute your Wisdom. Learn at Work Week. May 24-28 2021
+        div(id='bg-wrap')
+          .bg.bgtree
+          - for (var i=0; i<4; i++)
+            div(class='bg bg'+i)
 
-      h1 Distrubute your Wisdom. Learn at Work Week. May 24-28 2021
-      div(id='bg-wrap')
+        div(id='fg-wrap')
+          each val in ['pink', 'green', 'yellow', 'ryellow', 'rbyellow']
+            div(class='fg fg__'+val)
+
+        .title-pre
+
+      main
+        - var speakers = [{name: 'Noel Macatangay', thumb: 'noel'}, {name: 'Jane Barba', thumb: 'jane'}, {name: 'Yoj Vestudio', thumb: 'yoj'}, {name: 'Gerard Cruz', thumb: 'gerard'}, {name: 'Agung Yuliaji', thumb: 'agung'}, {name: 'Gifa Eriyanto', thumb: 'gifa'}];
+        h3 Speakers
+        ul
+          each val in speakers
+            li
+              img(src='/images/speaker_'+val.thumb+'.jpg')
+              WavyText(name=val.name)
+
+      footer
         .bg.bgtree
-        - for (var i=0; i<4; i++)
+        - for (var i=0; i<2; i++)
           div(class='bg bg'+i)
 
-      div(id='fg-wrap')
-        each val in ['pink', 'green', 'yellow', 'ryellow', 'rbyellow']
-          div(class='fg fg__'+val)
-
-      .title-pre
-
-    main
-      - var speakers = [{name: 'Noel Macatangay', thumb: 'noel'}, {name: 'Jane Barba', thumb: 'jane'}, {name: 'Yoj Vestudio', thumb: 'yoj'}, {name: 'Gerard Cruz', thumb: 'gerard'}, {name: 'Agung Yuliaji', thumb: 'agung'}, {name: 'Gifa Eriyanto', thumb: 'gifa'}];
-      h3 Speakers
-      ul
-        each val in speakers
-          li
-            img(src='/images/speaker_'+val.thumb+'.jpg')
-            WavyText(name=val.name)
-
-    footer
-      .bg.bgtree
-      - for (var i=0; i<2; i++)
-        div(class='bg bg'+i)
-
-    <svg width="0" height="0">
-      <defs>
-        <clipPath id="clipMask">
-          <path fill="#ffffff" stroke="#000000" stroke-width="1" stroke-miterlimit="5" d="M86.257,23.112c-0,-12.756 10.356,-23.112 23.112,-23.112c12.756,0 23.113,10.356 23.113,23.112c6.378,-11.047 20.525,-14.837 31.572,-8.459c11.047,6.378 14.837,20.525 8.459,31.572c11.048,-6.378 25.195,-2.588 31.573,8.46c6.378,11.047 2.587,25.194 -8.46,31.572c12.756,-0 23.112,10.356 23.112,23.112c0,12.756 -10.356,23.113 -23.112,23.113c11.047,6.378 14.838,20.525 8.46,31.572c-6.378,11.047 -20.525,14.837 -31.573,8.459c6.378,11.048 2.588,25.195 -8.459,31.573c-11.047,6.378 -25.194,2.587 -31.572,-8.46c-0,12.756 -10.357,23.112 -23.113,23.112c-12.756,0 -23.112,-10.356 -23.112,-23.112c-6.378,11.047 -20.525,14.838 -31.572,8.46c-11.048,-6.378 -14.838,-20.525 -8.46,-31.573c-11.047,6.378 -25.194,2.588 -31.572,-8.459c-6.378,-11.047 -2.588,-25.194 8.459,-31.572c-12.756,-0 -23.112,-10.357 -23.112,-23.113c0,-12.756 10.356,-23.112 23.112,-23.112c-11.047,-6.378 -14.837,-20.525 -8.459,-31.572c6.378,-11.048 20.525,-14.838 31.572,-8.46c-6.378,-11.047 -2.588,-25.194 8.46,-31.572c11.047,-6.378 25.194,-2.588 31.572,8.459Z"/>
-        </clipPath>
-      </defs>
-    </svg>
+      <svg width="0" height="0">
+        <defs>
+          <clipPath id="clipMask">
+            <path fill="#ffffff" stroke="#000000" stroke-width="1" stroke-miterlimit="5" d="M86.257,23.112c-0,-12.756 10.356,-23.112 23.112,-23.112c12.756,0 23.113,10.356 23.113,23.112c6.378,-11.047 20.525,-14.837 31.572,-8.459c11.047,6.378 14.837,20.525 8.459,31.572c11.048,-6.378 25.195,-2.588 31.573,8.46c6.378,11.047 2.587,25.194 -8.46,31.572c12.756,-0 23.112,10.356 23.112,23.112c0,12.756 -10.356,23.113 -23.112,23.113c11.047,6.378 14.838,20.525 8.46,31.572c-6.378,11.047 -20.525,14.837 -31.573,8.459c6.378,11.048 2.588,25.195 -8.459,31.573c-11.047,6.378 -25.194,2.587 -31.572,-8.46c-0,12.756 -10.357,23.112 -23.113,23.112c-12.756,0 -23.112,-10.356 -23.112,-23.112c-6.378,11.047 -20.525,14.838 -31.572,8.46c-11.048,-6.378 -14.838,-20.525 -8.46,-31.573c-11.047,6.378 -25.194,2.588 -31.572,-8.459c-6.378,-11.047 -2.588,-25.194 8.459,-31.572c-12.756,-0 -23.112,-10.357 -23.112,-23.113c0,-12.756 10.356,-23.112 23.112,-23.112c-11.047,-6.378 -14.837,-20.525 -8.459,-31.572c6.378,-11.048 20.525,-14.838 31.572,-8.46c-6.378,-11.047 -2.588,-25.194 8.46,-31.572c11.047,-6.378 25.194,-2.588 31.572,8.459Z"/>
+          </clipPath>
+        </defs>
+      </svg>
+      +else
+        Loader
 
 </template>
 <style lang="stylus">
@@ -317,7 +324,7 @@
         font-size 4.5rem
 
 
-  @media (min-width: 1600px)
+  @media (min-width: 1900px)
     .wrapper
       max-width 1500px
       border 10px solid white
