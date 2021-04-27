@@ -7,8 +7,7 @@
 
   gsap.registerPlugin(ScrollTrigger);
 
-  onMount(async () => {
-    loaded = true;
+  const gsapInit = async () => {
     await tick(); //ensure that DOM is ready for gsap
     gsap.set("h1", {opacity: 1});
     gsap.utils.toArray("li").forEach((speaker, i) => {
@@ -82,9 +81,9 @@
     gsap.from("footer .bg0", { scrollTrigger: footerAnimProps, y: 100, duration: 1 })
     gsap.to("footer .bg1", { scrollTrigger: footerAnimProps, y: 10, duration: .5 })
     gsap.to("footer .bgtree", { scrollTrigger: footerAnimProps, y: -200, duration: 1, delay: 1 })
-    $: console.log("loaded ", loaded);
-  });
+  };
 </script>
+<svelte:window on:load={() => { loaded = true; gsapInit() }} />
 <template lang="pug">
   .wrapper
     +if('loaded')
@@ -102,7 +101,7 @@
         .title-pre
 
       main
-        - var speakers = [{name: 'Noel Macatangay', thumb: 'noel'}, {name: 'Jane Barba', thumb: 'jane'}, {name: 'Yoj Vestudio', thumb: 'yoj'}, {name: 'Gerard Cruz', thumb: 'gerard'}, {name: 'Agung Yuliaji', thumb: 'agung'}, {name: 'Gifa Eriyanto', thumb: 'gifa'}];
+        - var speakers = [{name: 'Noel Macatangay', thumb: 'noel'}, {name: 'Jane Barba', thumb: 'jane'}, {name: 'Yoj Vestudio', thumb: 'yoj'}, {name: 'Gerard Cruz', thumb: 'gerard'}, {name: 'Agung Yuliaji', thumb: 'agung'}, {name: 'Gifa Eriyanto', thumb: 'gifa'}, {name: 'Ann Pauline Lim', thumb: 'ann'}, {name: 'Francis Tolentino Jr.', thumb: 'francis'}, {name: 'Justus Tumacder', thumb: 'justus'}];
         h3 Speakers
         ul
           each val in speakers
