@@ -3,7 +3,19 @@
   import { gsap } from 'gsap';
   import Loader from './Loader.svelte';
   import WavyText from './WavyText.svelte';
+  export let title;
   let loaded = false;
+  const speakers = [
+    {name: 'Noel Macatangay', thumb: 'noel'},
+    {name: 'Jane Barba', thumb: 'jane'},
+    {name: 'Yoj Vestudio', thumb: 'yoj'},
+    {name: 'Gerard Cruz', thumb: 'gerard'},
+    {name: 'Agung Yuliaji', thumb: 'agung'},
+    {name: 'Gifa Eriyanto', thumb: 'gifa'},
+    {name: 'Ann Pauline Lim', thumb: 'ann'},
+    {name: 'Francis Tolentino Jr.', thumb: 'francis'},
+    {name: 'Justus Tumacder', thumb: 'justus'}
+  ];
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -84,11 +96,14 @@
   };
 </script>
 <svelte:window on:load={() => { loaded = true; gsapInit() }} />
+<svelte:head>
+  <title>{title}</title>
+</svelte:head>
 <template lang="pug">
   .wrapper
     +if('loaded')
       header
-        h1 Distrubute your Wisdom. Learn at Work Week. May 24-28 2021
+        h1 {title}
         div(id='bg-wrap')
           .bg.bgtree
           - for (var i=0; i<4; i++)
@@ -101,13 +116,12 @@
         .title-pre
 
       main
-        - var speakers = [{name: 'Noel Macatangay', thumb: 'noel'}, {name: 'Jane Barba', thumb: 'jane'}, {name: 'Yoj Vestudio', thumb: 'yoj'}, {name: 'Gerard Cruz', thumb: 'gerard'}, {name: 'Agung Yuliaji', thumb: 'agung'}, {name: 'Gifa Eriyanto', thumb: 'gifa'}, {name: 'Ann Pauline Lim', thumb: 'ann'}, {name: 'Francis Tolentino Jr.', thumb: 'francis'}, {name: 'Justus Tumacder', thumb: 'justus'}];
         h3 Speakers
         ul
-          each val in speakers
+          +each('speakers as {name, thumb}')
             li
-              img(src='/images/speaker_'+val.thumb+'.jpg')
-              WavyText(name=val.name)
+              img(src="/images/speaker_{thumb}.jpg")
+              WavyText(name="{name}")
 
       footer
         .bg.bgtree
