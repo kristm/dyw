@@ -101,7 +101,7 @@
         .title-pre
 
       main
-        - var speakers = [{name: 'Noel Macatangay', thumb: 'noel'}, {name: 'Jane Barba', thumb: 'jane'}, {name: 'Yoj Vestudio', thumb: 'yoj'}, {name: 'Gerard Cruz', thumb: 'gerard'}, {name: 'Agung Yuliaji', thumb: 'agung'}, {name: 'Gifa Eriyanto', thumb: 'gifa'}];
+        - var speakers = [{name: 'Noel Macatangay', thumb: 'noel'}, {name: 'Jane Barba', thumb: 'jane'}, {name: 'Yoj Vestudio', thumb: 'yoj'}, {name: 'Gerard Cruz', thumb: 'gerard'}, {name: 'Agung Yuliaji', thumb: 'agung'}, {name: 'Gifa Eriyanto', thumb: 'gifa'}, {name: 'Ann Pauline Lim', thumb: 'ann'}, {name: 'Francis Tolentino Jr.', thumb: 'francis'}, {name: 'Justus Tumacder', thumb: 'justus'}];
         h3 Speakers
         ul
           each val in speakers
