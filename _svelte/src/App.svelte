@@ -69,11 +69,16 @@
     };
     gsap.to("h1", { scrollTrigger: titleAnimProps, scale: 1.4, duration: 2 })
 
+    function vrotate() {
+      const dir = ["+", "-"];
+      return dir[Math.round(gsap.utils.random(0,1))]+"="+gsap.utils.random(0,2);
+    }
+
     ScrollTrigger.batch("li", {
       interval: 1,
       batchMax: 2,
-      onEnter: batch => gsap.to(batch, {y: "-=20", duration: 1.5, stagger: 0.5}),
-      onEnterBack: batch => gsap.to(batch, {y: "+=20", duration: 1.5, stagger: 0.5}),
+      onEnter: batch => gsap.to(batch, {y: "-=20", rotation: vrotate, duration: 1.5, stagger: 0.5}),
+      onEnterBack: batch => gsap.to(batch, {y: "+=20", rotation: 0, duration: 1.5, stagger: 0.5}),
     });
 
     ScrollTrigger.batch(".speaker-name", {
