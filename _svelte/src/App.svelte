@@ -237,19 +237,19 @@
     position absolute
 
     &__pink {
-      background-image url('/images/left_pink.webp')
+      background-image url('/images/left_pink.png')
       background-position bottom left
       bottom 0
     }
 
     &__yellow {
-      background-image url('/images/left_yellow.webp')
+      background-image url('/images/left_yellow.png')
       background-position top left
       top 40% 
     }
 
     &__ryellow {
-      background-image url('/images/right_yellow.webp')
+      background-image url('/images/right_yellow.png')
       background-position top right
       background-size 80%
       height 70%
@@ -258,7 +258,7 @@
     }
 
     &__rbyellow {
-      background-image url('/images/right_bottom_yellow.webp')
+      background-image url('/images/right_bottom_yellow.png')
       background-position top right
       height 70%
       bottom -50px
@@ -266,7 +266,7 @@
     }
 
     &__green {
-      background-image url('/images/left_green.webp')
+      background-image url('/images/left_green.png')
       background-position -50px 0
       top 20%
     }
@@ -295,10 +295,10 @@
 
   for num in (0..3)
     .bg{num}
-      background-image url('/images/bg'+num+'.webp')
+      background-image url('/images/bg'+num+'.png')
 
   .bgtree
-    background-image url('/images/bgtree.webp')
+    background-image url('/images/bgtree.png')
     top 300px
 
 
