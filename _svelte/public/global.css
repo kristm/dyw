@@ -61,3 +61,9 @@ button:not(:disabled):active {
 button:focus {
 	border-color: #666;
 }
+
+.glow {
+  background-image: linear-gradient(80deg, #272C65, #25d3e4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
