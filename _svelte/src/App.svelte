@@ -37,7 +37,7 @@
       start: "top",
       end: "45%",
       markers: false,
-      scrub: 1,
+      scrub: 3,
     });
 
     let fgLeftProps = {
@@ -53,13 +53,13 @@
     };
 
     scene1.to(".fg__green", fgLeftProps);
+    scene1.to(".fg__pink", { xPercent: -100, yPercent: 90, duration: 1 }, 0.1);
     scene1.to(".fg__yellow", fgLeftProps, 0.1);
-    scene1.to(".fg__pink", { yPercent: 100, opacity: 0, duration: 1 }, 0.1);
     scene1.to(".fg__ryellow", fgRightProps,0.1);
     scene1.to(".fg__rbyellow", fgRightProps, 0.15);
     scene1.to(".title-pre", { opacity: 0, duration: 0.2 }, 0);
-    scene1.to("#bg-wrap", { yPercent: 150, duration: 2 }, 0);
-    scene1.to("#bg-wrap", {opacity:0, duration: 1},1);
+    scene1.to("#bg-wrap", { yPercent: 200, duration: 2 }, 0);
+    scene1.to("#bg-wrap", {opacity:0, duration: 0.5},1);
 
     let titleAnimProps = {
       trigger: "h1",
@@ -115,18 +115,24 @@
       return dir[Math.round(gsap.utils.random(0,1))]+"="+gsap.utils.random(0,2);
     }
 
+    function vdir(max=2) {
+      const dir = ["+", "-"];
+      return dir[Math.round(gsap.utils.random(0,1))]+"="+Math.round(gsap.utils.random(0,max));
+    }
+
+
     ScrollTrigger.batch("li", {
       interval: 1,
       batchMax: 2,
-      onEnter: batch => gsap.to(batch, {y: "-=20", rotation: vrotate, duration: 1.5, stagger: 0.5}),
-      onEnterBack: batch => gsap.to(batch, {y: "+=20", rotation: 0, duration: 1.5, stagger: 0.5}),
+      onEnter: batch => gsap.to(batch, {y: () => vdir(20), rotation: vrotate, duration: 1.5, stagger: 0.5}),
+      onEnterBack: batch => gsap.to(batch, {y: () => vdir(10), rotation: 0, duration: 1.5, stagger: 0.5}),
     });
 
     ScrollTrigger.batch(".speaker-name", {
       interval: 1,
       batchMax: 2,
-      onEnter: batch => { gsap.to(batch, {y: "+=5", duration: 1, stagger: 0.5}); unwrap() },
-      onEnterBack: batch => gsap.to(batch, {y: "-=2", duration: 1, stagger: 0.5}),
+      onEnter: batch => { gsap.to(batch, {y: vdir, duration: 1, stagger: 0.5}); unwrap() },
+      onEnterBack: batch => gsap.to(batch, {y: vdir, duration: 1, stagger: 0.5}),
     });
 
     let footerAnimProps = {
@@ -341,6 +347,7 @@
     //border 5px solid green
     height 1000px 
     position relative
+    transform-box view-box
     //bottom -200px
 
     & > .bgtree {
