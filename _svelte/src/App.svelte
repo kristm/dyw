@@ -17,6 +17,7 @@
     {name: 'Francis Tolentino Jr.', thumb: 'francis'},
     {name: 'Justus Tumacder', thumb: 'justus'}
   ];
+  const isChrome = !!window.chrome;
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -81,13 +82,18 @@
 
     function unwrap() {
       let h2 = document.querySelector("h2")
-      if (h2) {
+      if (h2 && isChrome) {
         h2.classList.add("glow")
       }
 
       let angle = Math.round(y/100+y/10-100)
 
-      gsap.to("h2", { scrollTrigger: h2AnimProps, backgroundImage: "linear-gradient("+angle+"deg, rgb(16, 18, 42), rgb(24 219 241))", duration: 3 })
+      const lightColors = ["rgb(212, 186, 211)", "rgb(24, 219, 241)"] // pink/light blue
+      //const lightColors = ["rgb(189, 18, 142)", "rgb(24, 219, 241)"] // pink/deep blue
+      const darkColors = ["rgb(16, 18, 42)", "rgb(24, 219, 241)"]
+      const colors = isChrome ? darkColors : lightColors;
+        
+      gsap.to("h2", { scrollTrigger: h2AnimProps, backgroundImage: "linear-gradient("+angle+"deg, "+colors[0]+", "+colors[1], duration: 3 })
       const spans = document.querySelectorAll("h2 span")
         spans.forEach((el) => {
           el.outerHTML = el.innerHTML
@@ -228,7 +234,7 @@
 
   h2
     font-size 3rem
-    width 50%
+    width 90%
     color white
     margin 100vh auto
     font-family Yellowtail
@@ -396,12 +402,18 @@
 
 
   @media (min-width: 1400px)
+    h2
+      width: 60%
+
     main
       h3
         font-size 4.5rem
 
 
   @media (min-width: 1900px)
+    h2
+      width: 50%
+
     .wrapper
       max-width 1500px
       border 10px solid white
