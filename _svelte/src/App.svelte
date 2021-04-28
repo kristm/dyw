@@ -4,6 +4,7 @@
   import Loader from './Loader.svelte';
   import WavyText from './WavyText.svelte';
   export let title;
+  let y;
   let loaded = false;
   const speakers = [
     {name: 'Noel Macatangay', thumb: 'noel'},
@@ -68,6 +69,40 @@
       scrub: 1,
     };
     gsap.to("h1", { scrollTrigger: titleAnimProps, scale: 1.4, duration: 2 })
+      
+    let h2AnimProps = {
+      trigger: "h2",
+      start: "top bottom",
+      end: "top",
+      ease: "power2",
+      scrub: 1,
+      markers: false,
+    };
+
+    function unwrap() {
+      let h2 = document.querySelector("h2")
+      if (h2) {
+        h2.classList.add("glow")
+      }
+
+      let angle = Math.round(y/100+y/10-100)
+
+      gsap.to("h2", { scrollTrigger: h2AnimProps, backgroundImage: "linear-gradient("+angle+"deg, rgb(16, 18, 42), rgb(24 219 241))", duration: 3 })
+      const spans = document.querySelectorAll("h2 span")
+        spans.forEach((el) => {
+          el.outerHTML = el.innerHTML
+        })
+    }
+
+    ScrollTrigger.batch("h2 span", {
+      interval: 1,
+      batchMax: 2,
+      start: "top bottom",
+      end: "top 10%",
+      ease: "power3",
+      markers: false,
+      onEnter: batch => gsap.to(batch, {x: 0, color: "#272C65", duration: 1.5, stagger: 0.2}),
+    });
 
     function vrotate() {
       const dir = ["+", "-"];
@@ -84,7 +119,7 @@
     ScrollTrigger.batch(".speaker-name", {
       interval: 1,
       batchMax: 2,
-      onEnter: batch => gsap.to(batch, {y: "+=5", duration: 1, stagger: 0.5}),
+      onEnter: batch => { gsap.to(batch, {y: "+=5", duration: 1, stagger: 0.5}); unwrap() },
       onEnterBack: batch => gsap.to(batch, {y: "-=2", duration: 1, stagger: 0.5}),
     });
 
@@ -100,9 +135,11 @@
     gsap.to("footer .bgtree", { scrollTrigger: footerAnimProps, y: -200, duration: 1, delay: 1 })
   };
 </script>
-<svelte:window on:load={() => { loaded = true; gsapInit() }} />
+<svelte:window on:load={() => { loaded = true; gsapInit() }} bind:scrollY={y}/>
 <svelte:head>
   <title>{title}</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet">
 </svelte:head>
 <template lang="pug">
   .wrapper
@@ -121,6 +158,14 @@
         .title-pre
 
       main
+        h2 
+          span Distribute Your Wisdom is a virtual conference 
+          span from members of the Quipper Global<br> 
+          span Team. The current pandemic situation has 
+          span challenged all of us in our work and everyday lives.
+          span But it also became an opportunity for growth and 
+          span discovery. <br>Join us in a week of knowledge sharing!
+
         h3 Speakers
         ul
           +each('speakers as {name, thumb}')
@@ -180,6 +225,20 @@
   h1
     background url('/dyw/assets/images/title.svg') no-repeat top center
     opacity 0
+
+  h2
+    font-size 3rem
+    width 50%
+    color white
+    margin 100vh auto
+    font-family Yellowtail
+    color #272C65
+
+    span
+      color skyblue
+      opacity 1
+      display block
+      transform translate(-100%, 0)
 
   .title-pre
     filter blur(2px)
