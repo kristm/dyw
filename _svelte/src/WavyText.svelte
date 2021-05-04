@@ -20,6 +20,9 @@
       src url("/fonts/Milkshake.woff")
       src url("/fonts/Milkshake.woff2")
 
+  svg
+    overflow visible!important
+
   text
     font-size 3rem
     font-family Yellowtail, Milkshake
