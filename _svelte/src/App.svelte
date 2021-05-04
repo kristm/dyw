@@ -15,7 +15,10 @@
     {name: 'Gifa Eriyanto', thumb: 'gifa'},
     {name: 'Ann Pauline Lim', thumb: 'ann'},
     {name: 'Francis Tolentino Jr.', thumb: 'francis'},
-    {name: 'Justus Tumacder', thumb: 'justus'}
+    {name: 'Justus Tumacder', thumb: 'justus'},
+    {name: 'Carlo Joseph Moskito', thumb: 'carlo'},
+    {name: 'Gregorious Gesta', thumb: 'gesta'},
+    {name: 'Zyra Reambonanza', thumb: 'zyra'}
   ];
   const isChrome = !!window.chrome;
 
