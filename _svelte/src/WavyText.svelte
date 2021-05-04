@@ -20,6 +20,9 @@
       src url("/dyw/assets/fonts/Milkshake.woff")
       src url("/dyw/assets/fonts/Milkshake.woff2")
 
+  svg
+    overflow visible!important
+
   text
     font-size 3rem
     font-family Yellowtail, Milkshake
