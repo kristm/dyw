@@ -110,7 +110,7 @@
       end: "top 10%",
       ease: "power3",
       markers: false,
-      onEnter: batch => gsap.to(batch, {x: 0, color: "#272C65", duration: 1.5, stagger: 0.2}),
+      onEnter: batch => gsap.to(batch, {y: 0, opacity: 1, color: "#272C65", duration: 1.5, stagger: 0.2}),
     });
 
     function vrotate() {
@@ -251,9 +251,9 @@
 
     span
       color skyblue
-      opacity 1
+      opacity 0
       display block
-      transform translate(-100%, 0)
+      transform translate(0, 100%)
 
   .title-pre
     filter blur(2px)
